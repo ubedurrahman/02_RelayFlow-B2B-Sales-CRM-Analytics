@@ -2,6 +2,7 @@
 
 **Author:** Md Ubed Ur Rahman  
 **Tools & Technologies:** Microsoft SQL Server (T-SQL) • Power BI Desktop (DAX & Star Schema) • Microsoft Excel  
+
 ---
 
 ## 🎯 Business Problem & Objective
@@ -11,22 +12,20 @@ This end-to-end analytics solution transforms raw CRM opportunity logs into a no
 
 ---
 
-## 🗂️ Data Architecture & Technical Workflow
+## 🗂️ Repository Files & Technical Workflow
 
-### 1. Relational Schema & Data Cleaning (`sql/01_Data_Cleaning_and_Schema.sql`)
-- Standardized **108 B2B CRM deals** (`Fact_Deals`) with strict `INT`, `DATE`, and `VARCHAR` data types.
-- Enforced referential integrity using **Primary and Foreign Keys** linking `Fact_Deals` to:
-  - `Dim_Salespeople` (5 account executives across **India**, **UAE / GCC**, and **Europe**)
-  - `Dim_FunnelStages` (7 ordered pipeline stages from `Lead` to `Won`/`Lost`)
+| File Name | Description |
+| :--- | :--- |
+| `01_Executive overview screenshot.png` | High-resolution preview of the Executive Overview Power BI dashboard |
+| `Pdf_RelayFlow_B2B_Sales_CRM_Analytics_PowerBI.pdf` | Exported PDF version of the report for quick recruiter viewing |
+| `RelayFlow_B2B_Sales_CRM_Analytics_PowerBI.pbix` | Interactive Power BI Desktop file with custom DAX measures & star schema |
+| `RelayFlow_B2B_Sales_CRM_Analytics_sql_query.sql` | Complete T-SQL script covering funnel conversion, pipeline valuation, rep ranking & loss analysis |
+| `RelayFlow_B2B_Sales_CRM_Analytics_Excel.xlsx` | Source B2B CRM dataset (108 deals, 5 sales reps, 7 ordered funnel stages) |
 
-### 2. T-SQL Business Analysis (`sql/02_B2B_Sales_Pipeline_Analysis.sql`)
-- **Cumulative Funnel Progression:** Used Common Table Expressions (`CTE`) and Window Functions (`FIRST_VALUE`, `LAG`) to track top-of-funnel and stage-to-stage conversion rates.
-- **Pipeline Valuation:** Calculated raw open pipeline versus probability-weighted revenue forecasts across active stages.
-- **Rep & Vertical Benchmarking:** Applied `RANK()` and conditional aggregations (`CASE WHEN`) to evaluate quota attainment, sales cycle velocity, and loss root causes.
-
-### 3. Interactive Power BI Dashboard (`RelayFlow_B2B_Sales_Pipeline_Dashboard.pbix`)
-- Built a dedicated `_Measures` table with dynamic DAX formulas (`CALCULATE`, `SUMX`, `SWITCH`, `DATEDIFF`, `REMOVEFILTERS`).
-- Enabled cross-filtering across **Industry**, **Region**, and **Lead Source** slicers on a single executive view.
+### Technical Implementation Highlights
+1. **Relational Data Modeling (SQL Server):** Standardized **108 B2B CRM deals** (`Fact_Deals`) linked via Primary and Foreign Keys to `Dim_Salespeople` (5 account executives across **India**, **UAE / GCC**, and **Europe**) and `Dim_FunnelStages` (7 stages from `Lead` to `Won`/`Lost`).
+2. **Advanced T-SQL Analysis:** Engineered Common Table Expressions (`CTE`) and Window Functions (`FIRST_VALUE`, `LAG`, `RANK`) to compute cumulative funnel progression, stage-to-stage drop-off, weighted pipeline forecasts, and quota attainment.
+3. **Interactive Power BI & DAX:** Built a dedicated `_Measures` table (`CALCULATE`, `SUMX`, `SWITCH`, `DATEDIFF`, `REMOVEFILTERS`) with dynamic **Industry**, **Region**, and **Lead Source** slicers.
 
 ---
 
@@ -50,11 +49,12 @@ This end-to-end analytics solution transforms raw CRM opportunity logs into a no
 ---
 
 ## 🚀 How to Reproduce This Project
-1. Run `sql/01_Data_Cleaning_and_Schema.sql` in **SQL Server Management Studio (SSMS)** after importing `data/RelayFlow_B2B_Sales_CRM_Analytics.xlsx`.
-2. Execute `sql/02_B2B_Sales_Pipeline_Analysis.sql` to reproduce all funnel, pipeline, rep, and industry KPIs.
-3. Open `RelayFlow_B2B_Sales_Pipeline_Dashboard.pbix` in **Power BI Desktop** and update the SQL Server data source connection to your local server instance.
+1. Import `RelayFlow_B2B_Sales_CRM_Analytics_Excel.xlsx` into **SQL Server Management Studio (SSMS)**.
+2. Run `RelayFlow_B2B_Sales_CRM_Analytics_sql_query.sql` to execute all funnel conversion, pipeline valuation, rep ranking, and loss root-cause queries.
+3. Open `RelayFlow_B2B_Sales_CRM_Analytics_PowerBI.pbix` in **Power BI Desktop** (or view `Pdf_RelayFlow_B2B_Sales_CRM_Analytics_PowerBI.pdf` directly in GitHub).
 
 ---
 
 ## 📜 License & Usage
 © 2026 **Md Ubed Ur Rahman**. All rights reserved. Shared for portfolio and recruiter evaluation purposes.
+
